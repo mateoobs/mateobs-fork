@@ -1,0 +1,228 @@
+{
+  "name": "mateo barrios",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "registro",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "9cf760d7-ce13-40d2-95b3-e126ed00f8ba",
+      "name": "Webhook",
+      "webhookId": "976dfc13-e20b-4094-92db-826c16aff497"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a59c9858-cf3d-4bb3-bf66-72f512677452",
+              "name": "usuario",
+              "value": "={{$json[\"body\"][\"usuario\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "1584b656-400f-471c-8bed-7d0f3f8bec0a",
+              "name": "gmail",
+              "value": "={{$json[\"body\"][\"email\"]}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "7f1b0fd6-b01e-4a92-9513-8504c6b25775",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a0189445-7aea-4227-a6b9-1186f301ca09",
+              "leftValue": "={{$json[\"gmail\"]}}",
+              "rightValue": "@",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "eb31011e-affe-488a-8c60-d71f92fb0c8c",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "11rE5N_rRuPqedmTg8LRCTiYB5MfKi7QScTzN4CyJB7c",
+          "mode": "list",
+          "cachedResultName": "UsuariosN8N",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11rE5N_rRuPqedmTg8LRCTiYB5MfKi7QScTzN4CyJB7c/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/11rE5N_rRuPqedmTg8LRCTiYB5MfKi7QScTzN4CyJB7c/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Usuario": "={{$json[\"usuario\"]}}",
+            "Gmail": "={{$json[\"gmail\"]}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Usuario",
+              "displayName": "Usuario",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Gmail",
+              "displayName": "Gmail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        624,
+        -96
+      ],
+      "id": "fb240304-3ac2-4fd0-ac7e-cc963ab629d4",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "i1ZOJoMHAQ3gzjn6",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "barriosmateop@gmail.com",
+        "subject": "No te estaría funcionando el @ che",
+        "message": "Tu correo no tiene @",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        624,
+        96
+      ],
+      "id": "671f88da-05ad-4df5-8245-5bb69a99be28",
+      "name": "Send a message",
+      "webhookId": "5471eb75-66c7-4bb7-ad0e-562b79842bda",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "3LJhz8FmXbHrYuor",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "3148cd92-e651-4cb1-bb96-6aa0d3f44631",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6b7bfcefaf65f2f2281c300184b4f173369ebb5cec940e0d79493bce270c39bc"
+  },
+  "id": "5zMDaZmcNFcMMCBD",
+  "tags": []
+}
