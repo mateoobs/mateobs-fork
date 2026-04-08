@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0d0d0f;
+    color: #e8e6df;
+}
+
+header {
+    background: #111114;
+    border-bottom: 1px solid #2a2a2e;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.logo span {
+    color: #5b8def;
+}
+
+nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav a {
+    color: #9c9a92;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #e8e6df;
+}
+
+.page-hero {
+    background: #111114;
+    padding: 3rem 2rem 2.5rem;
+    border-bottom: 1px solid #1e1e24;
+}
+
+.page-hero h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #3dbf8a;
+}
+
+.page-hero p {
+    color: #9c9a92;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.section {
+    padding: 2.5rem 2rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.card {
+    background: #111114;
+    border: 1px solid #2a2a2e;
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: border-color 0.2s;
+}
+
+.card:hover {
+    border-color: #3dbf8a;
+}
+
+.card-icon {
+    font-size: 32px;
+    margin-bottom: 0.5rem;
+}
+
+.card-tag {
+    font-size: 11px;
+    color: #3dbf8a;
+    background: #0a2a1a;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 0.6rem;
+}
+
+.card h3 {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.card p {
+    font-size: 13px;
+    color: #6e6d66;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e8e6df;
+}
+
+.price span {
+    font-size: 13px;
+    color: #6e6d66;
+    font-weight: normal;
+}
+
+footer {
+    background: #111114;
+    border-top: 1px solid #1e1e24;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    color: #6e6d66;
+    font-size: 14px;
+}
